@@ -4,15 +4,14 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: red;
-  min-height: 100vh;
-
-  & h1 {
-    color: white;
-    text-align: center;
-    font-family: sans-serif;
-    font-size: 55px;
-    line-height: 100vh;
-  }
+html {
+  font-family: sans-serif;
 }
+
+body {
+  min-height: 100vh;
+  background-color: #23293f;
+}
+
+@import "./_Home.scss";
+@import "./About";

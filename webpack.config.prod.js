@@ -5,13 +5,13 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  mode: "development",
+  mode: "production",
   entry: {
     main: "./src/index.js"
   },
 
   output: {
-    filename: "main.js",
+    filename: "js/main.js",
     path: path.resolve(__dirname, "build")
   },
   module: {
@@ -35,10 +35,7 @@ module.exports = {
       }
     ]
   },
-  devServer: {
-    open: true,
-    contentBase: path.resolve(__dirname, "build")
-  },
+
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
@@ -48,6 +45,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "css/style.css"
     }),
+
     new CopyPlugin([{ from: "./images", to: "img" }])
   ]
 };

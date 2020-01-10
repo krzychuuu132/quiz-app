@@ -1,0 +1,150 @@
+.header {
+  width: 100%;
+  height: 110px;
+  background-color: #2e425a;
+  display: grid;
+
+  padding: 10px;
+  align-items: center;
+
+  border-radius: 0 0 80px 80px;
+
+  &__h1 {
+    font-family: "Roboto", sans-serif;
+
+    color: white;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    font-weight: normal;
+    font-size: 1.8rem;
+  }
+}
+
+.nav {
+  width: 100%;
+  height: 37px;
+  display: grid;
+  grid-template-columns: 60px auto 60px;
+  padding-right: 10px;
+
+  align-items: center;
+
+  &__hamburger {
+    width: 22px;
+    height: 20px;
+    position: relative;
+    z-index: 2;
+
+    &-btn {
+      border: none;
+      background-color: transparent;
+      outline: none;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: 0.2s;
+
+      &--active {
+        transform: translateX(100px);
+      }
+    }
+
+    &-line {
+      width: 10px;
+      height: 1px;
+      background-color: white;
+      display: block;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+
+        height: 1px;
+        background-color: white;
+      }
+
+      &::before {
+        width: 100%;
+        top: 50%;
+        left: 0;
+      }
+
+      &::after {
+        bottom: 0;
+        right: 0;
+        width: 10px;
+      }
+    }
+  }
+
+  &__user {
+    width: 50px;
+    height: 50px;
+    background-color: #4c5a77;
+    border-radius: 50px;
+    text-align: center;
+    line-height: 65px;
+  }
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 190px;
+  height: 65%;
+  background-color: rgba(0, 0, 0, 0.952);
+  border-radius: 0px 60px 60px 0px;
+  transform: translateX(-100%);
+  transition: all 0.3s ease-in-out;
+
+  z-index: 1;
+
+  &--active {
+    transform: translateX(0);
+  }
+}
+
+.statist {
+  width: 90%;
+  height: 100px;
+  border-radius: 15px;
+  background-color: #e78230;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 25px;
+  letter-spacing: 1px;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 1px;
+    height: 60%;
+    background-color: white;
+    border-radius: 5px;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+
+    &-counter {
+      font-size: 25px;
+    }
+
+    &-rank {
+      font-size: 14px;
+      text-transform: capitalize;
+    }
+  }
+}
