@@ -13,5 +13,23 @@ body {
   background-color: #23293f;
 }
 
+#root {
+  position: relative;
+  min-height: 95vh;
+}
+
+#root::after {
+  content: "";
+  position: absolute;
+  bottom: -4%;
+  left: 50%;
+  width: 70px;
+  height: 3px;
+  background-color: #2e425a;
+  margin-bottom: 10px;
+  transform: translateX(-50%);
+  border-radius: 25px;
+}
+
 @import "./_Home.scss";
 @import "./About";
