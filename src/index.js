@@ -1,28 +1,32 @@
 // API - https://opentdb.com/api.php?amount=10&type=multiple
 import "./sass/style.scss";
-import { pathSettings } from "./components/pathSettings";
-import { handleBtnClick } from "./components/navigation";
-import {
-  handleCategoryClick,
-  handleSubmitCategory
-} from "./components/CategoriesValidation";
+import { Error404 } from "./components/Error404";
+import { Utils } from "./components/pathSettings";
+import { Level } from "./components/Level";
+import { Home } from "./components/Home";
+import { startGame } from "./components/startGame";
 
-pathSettings("/");
+const routes = {
+  "/": Home,
+  "/level": Level,
+  "/startGame": startGame
+};
 
-const btn = document.querySelector(".nav__hamburger-btn");
-const menu = document.querySelector(".menu");
-const list = document.querySelectorAll(".menu__item");
-// HAMBURGER
-btn.addEventListener("click", () => handleBtnClick(btn, menu, list));
+const router = async () => {
+  const content = null || document.getElementById("root");
 
-// CATEGORY CHOICE
+  let request = Utils.parseRequestURL();
 
-const divs = [...document.querySelectorAll(".categories__option")];
-const btn_category = document.querySelector(".select");
+  let parsedURL =
+    (request.resource ? "/" + request.resource : "/") +
+    (request.id ? "/" : "") +
+    (request.verb ? "/" + request.verb : "");
 
-divs.forEach((div, index) => {
-  div.addEventListener("click", () =>
-    handleCategoryClick(divs, btn_category, index)
-  );
-});
-btn_category.addEventListener("click", () => handleSubmitCategory(divs));
+  let page = routes[parsedURL] ? routes[parsedURL] : Error404;
+  content.innerHTML = await page.render();
+  await page.after_render();
+};
+
+window.addEventListener("hashchange", router);
+
+window.addEventListener("load", router);

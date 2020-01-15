@@ -1,24 +1,16 @@
-import { home } from "./Home";
-import { handleContact } from "./Contact";
-import { about } from "./About";
+export const Utils = {
+  parseRequestURL: () => {
+    let url = location.hash.slice(1) || "/";
+    let r = url.split("/");
+    let request = {
+      resource: null,
+      id: null,
+      verb: null
+    };
+    request.resource = r[1];
+    request.id = r[2];
+    request.verb = r[3];
 
-export const pathSettings = selectPath => {
-  const routes = {
-    "/": home,
-    "/contact": handleContact(),
-    "/level": about
-  };
-  const path = ["/", "/contact", "/about"];
-  const rootDiv = document.getElementById("root");
-  rootDiv.innerHTML = routes[window.location.pathname];
-
-  const onNavigate = pathname => {
-    window.history.pushState({}, pathname, window.location.origin + pathname);
-    window.localStorage.setItem("url", pathname);
-    rootDiv.innerHTML = routes[pathname];
-  };
-  onNavigate(selectPath);
-  window.onpopstate = () => {
-    rootDiv.innerHTML = routes[window.location.pathname];
-  };
+    return request;
+  }
 };

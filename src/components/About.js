@@ -1,1 +1,11 @@
-export const about = `<h1 class="about">I am about Page</h1>`;
+export let About = {
+  render: async () => {
+    let view = /*html*/ `
+            
+                <h1> About </h1>
+              
+        `;
+    return view;
+  },
+  after_render: async () => {}
+};

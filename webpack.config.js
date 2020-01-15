@@ -12,7 +12,8 @@ module.exports = {
 
   output: {
     filename: "main.js",
-    path: path.resolve(__dirname, "build")
+    path: path.resolve(__dirname, "build"),
+    publicPath: "/"
   },
   module: {
     rules: [
@@ -37,7 +38,8 @@ module.exports = {
   },
   devServer: {
     open: true,
-    contentBase: path.resolve(__dirname, "build")
+
+    historyApiFallback: true
   },
   plugins: [
     new CleanWebpackPlugin(),

@@ -1,7 +1,5 @@
-import { pathSettings } from "./pathSettings";
-
 export const handleCategoryClick = (divs, btn_category, index) => {
-  //VALIDATION
+  // VALIDATION
   divs.forEach(div => (div.style.backgroundColor = ""));
 
   // CATEGORIES
@@ -11,7 +9,7 @@ export const handleCategoryClick = (divs, btn_category, index) => {
   // BTN
   btn_category.classList.add("select--active");
 };
-
+export let div;
 export const handleSubmitCategory = divs => {
   const checking = divs.filter(div =>
     div.className.includes("categories__option--active")
@@ -19,8 +17,7 @@ export const handleSubmitCategory = divs => {
 
   if (checking.length === 0) {
     divs.forEach(div => (div.style.backgroundColor = "red"));
-  } else {
-    pathSettings("/#/level");
-    console.log(window.localStorage);
   }
+
+  localStorage.setItem("userChoice", checking[0].dataset.name);
 };
