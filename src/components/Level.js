@@ -13,7 +13,7 @@ export let Level = {
 
     let view = /*html*/ `
         <header class="category">
-        <img src='img/${userChoice}.png' class="category__picture" alt=${userChoice}>
+        <img src='./quiz-app/img/${userChoice}.png' class="category__picture" alt=${userChoice}>
         <span class="category__content">${userContent}</span>
         <button class="category__exit"></button>
 

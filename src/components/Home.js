@@ -16,7 +16,7 @@ export let Home = {
                   </button> 
               </div>
           <h1 class="header__h1">quiz app</h1>
-          <div class="nav__user"><img src="./img/user.png" class="nav__user-img" alt="user"></div>
+          <div class="nav__user"><img src="./quiz-app/img/user.png" class="nav__user-img" alt="user"></div>
       </nav>
       
   </header>
@@ -35,12 +35,12 @@ export let Home = {
   
   </section>
   <section  class="categories">
-      <div class="categories__option" data-name="sport"><img src="./img/sport.png" class="categories__option-img">Sports</div>
-      <div class="categories__option" data-name="politics"><img src="./img/politics.png" class="categories__option-img">Politics</div>
-      <div class="categories__option" data-name="games"><img src="./img/games.png" class="categories__option-img">Video Games</div>
-      <div class="categories__option" data-name="board_game"><img src="./img/board_game.png" class="categories__option-img">Board Games</div>
-      <div class="categories__option" data-name="computer"><img src="./img/computer.png" class="categories__option-img">Computers</div>
-      <div class="categories__option" data-name="history"><img src="./img/history.png" class="categories__option-img">History</div>
+      <div class="categories__option" data-name="sport"><img src="./quiz-app/img/sport.png" class="categories__option-img">Sports</div>
+      <div class="categories__option" data-name="politics"><img src="./quiz-app/img/politics.png" class="categories__option-img">Politics</div>
+      <div class="categories__option" data-name="games"><img src="./quiz-app/img/games.png" class="categories__option-img">Video Games</div>
+      <div class="categories__option" data-name="board_game"><img src="./quiz-app/img/board_game.png" class="categories__option-img">Board Games</div>
+      <div class="categories__option" data-name="computer"><img src="./quiz-app/img/computer.png" class="categories__option-img">Computers</div>
+      <div class="categories__option" data-name="history"><img src="./quiz-app/img/history.png" class="categories__option-img">History</div>
   </section>
   
   
