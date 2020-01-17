@@ -42,6 +42,6 @@ export let Level = {
 
     document
       .querySelector(".category__exit")
-      .addEventListener("click", () => (window.location = "/"));
+      .addEventListener("click", () => (window.location = "#"));
   }
 };

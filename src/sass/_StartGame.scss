@@ -68,13 +68,14 @@
         background-color: #CBDCE6;
         border-radius: 35px;
         margin: 6px 0;
+        transition: .3s;
 
 
 
         font-weight: bold;
         font-size: 17px;
         display: grid;
-        grid-template-columns: 50px 1fr;
+        grid-template-columns: 45px 1fr;
         align-items: center;
         justify-content: start;
 
@@ -86,13 +87,40 @@
             text-align: center;
             line-height: 40px;
             background-color: #e78230;
-            border-radius: 45%;
+            border-radius: 85%;
             margin: 0 10px;
             color: white;
+
 
         }
 
         &-text {}
     }
 
+}
+
+.answers__answer--active {
+    background-color: #e78230;
+    color: white;
+    display: flex;
+
+
+
+    .answers__answer-number {
+        background-color: #CBDCE6;
+        color: black;
+        //grid-column: 2;
+        order: 2;
+        width: 45px;
+        margin: 0 7px;
+    }
+
+    .answers__answer-text {
+        order: 1;
+        //grid-column: 1;
+    }
+
+    .answers__answer-icon {
+        color: black
+    }
 }

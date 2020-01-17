@@ -9,7 +9,7 @@ export const handleCategoryClick = (divs, btn_category, index) => {
   // BTN
   btn_category.classList.add("select--active");
 };
-export let div;
+
 export const handleSubmitCategory = divs => {
   const checking = divs.filter(div =>
     div.className.includes("categories__option--active")

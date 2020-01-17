@@ -35,7 +35,7 @@ export let Home = {
   
   </section>
   <section  class="categories">
-      <div class="categories__option" data-name="Sports" data-category="21"><img src="img/sport.png" class="categories__option-img">Sports</div>
+      <div class="categories__option" data-name="sport" data-category="21"><img src="img/sport.png" class="categories__option-img">Sports</div>
       <div class="categories__option" data-name="politics" data-category="24"><img src="img/politics.png" class="categories__option-img">Politics</div>
       <div class="categories__option" data-name="games" data-category="15"><img src="img/games.png" class="categories__option-img">Video Games</div>
       <div class="categories__option" data-name="board_game" data-category="16"><img src="img/board_game.png" class="categories__option-img">Board Games</div>
@@ -45,7 +45,7 @@ export let Home = {
   
   
   </main>
-  <button class="select" ">
+  <button class="select" >
   Select
 </button>
   `;
