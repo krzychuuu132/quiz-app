@@ -13,16 +13,16 @@ export let Level = {
 
     let view = /*html*/ `
         <header class="category">
-        <img src='./docs/img/${userChoice}.png' class="category__picture" alt=${userChoice}>
+        <img src='img/${userChoice}.png' class="category__picture" alt=${userChoice}>
         <span class="category__content">${userContent}</span>
         <button class="category__exit"></button>
 
     </header>
     <section class="section">
         <h1 class="section__title">select level</h1>
-        <div class="section__level">easy</div>
-        <div class="section__level">medium</div>
-        <div class="section__level">hard</div>
+        <div class="section__level">Easy</div>
+        <div class="section__level">Medium</div>
+        <div class="section__level">Hard</div>
     </section>
     <button class="select">select</button>
         `;
@@ -38,7 +38,7 @@ export let Level = {
 
     document
       .querySelector(".select")
-      .addEventListener("click", () => (window.location = "/#/startGame"));
+      .addEventListener("click", () => (window.location.href = "#/startGame"));
 
     document
       .querySelector(".category__exit")

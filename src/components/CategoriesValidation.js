@@ -20,4 +20,5 @@ export const handleSubmitCategory = divs => {
   }
 
   localStorage.setItem("userChoice", checking[0].dataset.name);
+  localStorage.setItem("userCategory", checking[0].dataset.category);
 };

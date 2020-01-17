@@ -16,7 +16,7 @@ export let Home = {
                   </button> 
               </div>
           <h1 class="header__h1">quiz app</h1>
-          <div class="nav__user"><img src="./docs/img/user.png" class="nav__user-img" alt="user"></div>
+          <div class="nav__user"><img src="img/user.png" class="nav__user-img" alt="user"></div>
       </nav>
       
   </header>
@@ -35,12 +35,12 @@ export let Home = {
   
   </section>
   <section  class="categories">
-      <div class="categories__option" data-name="sport"><img src="./docs/img/sport.png" class="categories__option-img">Sports</div>
-      <div class="categories__option" data-name="politics"><img src="docs/img/politics.png" class="categories__option-img">Politics</div>
-      <div class="categories__option" data-name="games"><img src="docs/img/games.png" class="categories__option-img">Video Games</div>
-      <div class="categories__option" data-name="board_game"><img src="docs/img/board_game.png" class="categories__option-img">Board Games</div>
-      <div class="categories__option" data-name="computer"><img src="docs/img/computer.png" class="categories__option-img">Computers</div>
-      <div class="categories__option" data-name="history"><img src="docs/img/history.png" class="categories__option-img">History</div>
+      <div class="categories__option" data-name="Sports" data-category="21"><img src="img/sport.png" class="categories__option-img">Sports</div>
+      <div class="categories__option" data-name="politics" data-category="24"><img src="img/politics.png" class="categories__option-img">Politics</div>
+      <div class="categories__option" data-name="games" data-category="15"><img src="img/games.png" class="categories__option-img">Video Games</div>
+      <div class="categories__option" data-name="board_game" data-category="16"><img src="img/board_game.png" class="categories__option-img">Board Games</div>
+      <div class="categories__option" data-name="computer" data-category="18"><img src="img/computer.png" class="categories__option-img">Computers</div>
+      <div class="categories__option" data-name="history" data-category="23"><img src="img/history.png" class="categories__option-img">History</div>
   </section>
   
   
@@ -76,7 +76,7 @@ export let Home = {
 
     document
       .querySelector(".select")
-      .addEventListener("click", () => (window.location = "/#/level"));
+      .addEventListener("click", () => (window.location = "#/level"));
   }
 };
 //<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
