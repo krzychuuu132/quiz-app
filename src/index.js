@@ -5,11 +5,13 @@ import { Utils } from "./components/pathSettings";
 import { Level } from "./components/Level";
 import { Home } from "./components/Home";
 import { startGame } from "./components/startGame";
+import { Finish } from "./components/finishGame";
 
 const routes = {
   "/": Home,
   "/level": Level,
-  "/startGame": startGame
+  "/startGame": startGame,
+  "/finish": Finish
 };
 
 const router = async () => {

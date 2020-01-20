@@ -10,10 +10,12 @@ export const handleBtnLevelClick = divs => {
   const checking = divs.filter(div =>
     div.className.includes("section__level--active")
   );
-  localStorage.setItem("userLevel", checking[0].innerText);
 
   if (checking.length === 0) {
     divs.forEach(div => (div.style.backgroundColor = "red"));
   } else {
+    localStorage.setItem("userLevel", checking[0].innerText);
+    localStorage.setItem("userCorrectAnswers", 0);
+    window.location.href = "#/startGame";
   }
 };

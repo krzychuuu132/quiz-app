@@ -17,8 +17,9 @@ export const handleSubmitCategory = divs => {
 
   if (checking.length === 0) {
     divs.forEach(div => (div.style.backgroundColor = "red"));
+  } else {
+    localStorage.setItem("userChoice", checking[0].dataset.name);
+    localStorage.setItem("userCategory", checking[0].dataset.category);
+    window.location = "#/level";
   }
-
-  localStorage.setItem("userChoice", checking[0].dataset.name);
-  localStorage.setItem("userCategory", checking[0].dataset.category);
 };

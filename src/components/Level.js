@@ -37,10 +37,6 @@ export let Level = {
     );
 
     document
-      .querySelector(".select")
-      .addEventListener("click", () => (window.location.href = "#/startGame"));
-
-    document
       .querySelector(".category__exit")
       .addEventListener("click", () => (window.location = "#"));
   }
