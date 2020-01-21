@@ -72,7 +72,7 @@ const handleIndexChange = () => {
 
           if (counter === 10) {
             endGame = true;
-            counter = 0;
+
             return setTimeout(() => (window.location = "#/finish"), 1000);
           }
         });
@@ -100,10 +100,15 @@ const handleAnswerClick = (index, elements, answers) => {
 };
 export let startGame = {
   render: async () => {
+    localStorage.setItem("userCorrectAnswers", 0);
+
     const { userChoice } = localStorage;
     let userContent = userChoice;
+    time = 60;
     endGame = false;
-    startGame.after_render();
+    counter = 0;
+    answered = true;
+
     if (userContent == "games") userContent = "Video Games";
     else if (userContent == "board_game") userContent = "board games";
 
@@ -137,24 +142,25 @@ export let startGame = {
   },
   after_render: async () => {
     if (!endGame) {
+      // ELEMENTS
       const question_text = document.querySelector(".section__question-text");
       const answers_elements = document.querySelectorAll(
         ".answers__answer-text"
       );
-      document.querySelector(".section__info-counter").innerText =
-        `${counter + 1}/10` || "";
       const answers_container = [
         ...document.querySelectorAll(".answers__answer")
       ];
 
+      // LISTENERS
       answers_container.forEach((answer, index) =>
         answer.addEventListener("click", () =>
           handleAnswerClick(index, answer, answers_container)
         )
       );
-      document
-        .querySelector(".category__exit")
-        .addEventListener("click", () => (window.location = "#"));
+      const btn = document.querySelector(".select");
+      btn.addEventListener("click", handleIndexChange);
+
+      // API
       const { userChoice, userLevel, userCategory } = localStorage;
       const url = `https://opentdb.com/api.php?amount=10&type=multiple&category=${userCategory}&difficulty=${userLevel.toLowerCase()}`;
 
@@ -163,6 +169,7 @@ export let startGame = {
 
       const copyData = data.results.map(result => result);
 
+      // DATA
       const {
         category,
         question,
@@ -174,8 +181,7 @@ export let startGame = {
       localStorage.setItem("correctAnswer", correct_answer);
 
       answers.push(correct_answer);
-      const btn = document.querySelector(".select");
-      btn.addEventListener("click", handleIndexChange);
+      answers.sort();
 
       question_text.innerText = `${counter + 1}. ${question}`;
 
@@ -203,9 +209,19 @@ export let startGame = {
           clearInterval(interval);
         } else {
           time--;
+          answered = false;
         }
       }
 
+      document.querySelector(".section__info-counter").innerText = `${counter +
+        1}/10`;
+
+      document
+        .querySelector(".category__exit")
+        .addEventListener(
+          "click",
+          () => ((window.location = "#"), clearInterval(interval))
+        );
       //  END OF GAME
     }
   }
