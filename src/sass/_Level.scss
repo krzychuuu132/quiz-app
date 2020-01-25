@@ -41,15 +41,27 @@
         background-color: transparent;
         position: relative;
         border: none;
-        //margin: 0 auto;
-        //transform: translateX(95px);
         outline: none;
         grid-column: 5;
+
+        @media(min-width:1024px) {
+            cursor: pointer;
+
+
+
+            &:hover::after,
+            &:hover::before {
+                background-color: rgb(243, 103, 103);
+            }
+
+        }
 
 
         &::after,
         &::before {
-            @include button-exit_line
+            @include button-exit_line;
+
+
         }
 
         &::after {
@@ -78,6 +90,7 @@
 
     &__level {
         width: 70%;
+        max-width: 700px;
         height: 50px;
         background-color: #2e425a;
         margin: 50px auto;
@@ -92,9 +105,25 @@
         transform: translateX(0px);
         font-weight: bold;
 
+        @media(min-width:1024px) {
+            &:hover {
+                cursor: pointer;
+                transform: translateX(30px);
+                background-color: #e78230;
+            }
+        }
+
         &--active {
             background-color: #e78230;
             transform: translateX(30px);
+
+            @media(min-width:1024px) {
+                &:hover {
+
+                    transform: translateX(30px);
+                    background-color: #e78230;
+                }
+            }
         }
 
     }

@@ -16,7 +16,9 @@
 .section-end {
     font-family: 'Open Sans', sans-serif;
     width: 80%;
-    height: 95%;
+    max-width: 500px;
+    min-height: 500px;
+    height: 70vh;
     border-radius: 25px;
     background-color: #CBDCE6;
     display: flex;

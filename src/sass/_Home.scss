@@ -36,6 +36,7 @@
     z-index: 2;
 
     &-btn {
+
       border: none;
       background-color: transparent;
       outline: none;
@@ -48,9 +49,9 @@
 
       &--active {
         position: fixed;
-        width: auto;
-        height: auto;
-        transform: translateX(100px);
+        width: 22px;
+        height: 30px;
+        transform: translate(100px, -10px), ;
       }
     }
 
@@ -156,7 +157,9 @@
 }
 
 .statist {
-  width: 90%;
+  width: 93%;
+  max-width: 900px;
+
   height: 100px;
   border-radius: 15px;
   background-color: #e78230;
@@ -217,6 +220,8 @@
     justify-content: center;
     background-color: #2e425a;
     width: 90%;
+    min-width: 270px;
+    max-width: 750px;
     height: 90px;
     border-radius: 15px;
     margin: 9px 0;
@@ -228,6 +233,14 @@
     font-size: 22px;
     font-weight: 100;
     transition: 0.3s;
+    transform: translateX(0px);
+
+    @media(min-width:1024px) {
+      &:hover {
+        transform: translateX(10px);
+        cursor: pointer;
+      }
+    }
 
     &:nth-child(1),
     &:nth-child(2),
@@ -250,6 +263,8 @@
   display: block;
   margin: 30px auto;
   width: 85%;
+  min-width: 270px;
+  max-width: 500px;
   height: 60px;
   border-radius: 20px;
   border: none;
@@ -259,9 +274,18 @@
   background-color: #cadae7;
   transition: 0.2s;
   outline: none;
+  cursor: pointer;
 
   &--active {
     background-color: #e78230;
     color: white;
+  }
+
+  @media(min-width:1024px) {
+    &:hover {
+      letter-spacing: 2px;
+      background-color: #e78230;
+      color: white;
+    }
   }
 }

@@ -104,10 +104,13 @@ export let startGame = {
 
     const { userChoice } = localStorage;
     let userContent = userChoice;
+
+    // RESET
     time = 60;
     endGame = false;
     counter = 0;
     answered = true;
+    correct_user_answer = 0;
 
     if (userContent == "games") userContent = "Video Games";
     else if (userContent == "board_game") userContent = "board games";
@@ -198,6 +201,13 @@ export let startGame = {
         time < 10
           ? (time_counter.innerText = `00:0${time} min`)
           : (time_counter.innerText = `00:${time} min`);
+        if (time <= 10) {
+          time_counter.style.color = "red";
+          time_counter.style.fontSize = "18px";
+        } else {
+          time_counter.style.color = "white";
+          time_counter.style.fontSize = "16px";
+        }
 
         if (time === 0) {
           answered = true;
