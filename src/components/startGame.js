@@ -71,7 +71,7 @@ const handleIndexChange = () => {
 
         answers.forEach(answer => (answer.style.backgroundColor = ""));
         answers.forEach(answer => (answer.style.color = ""));
-        counter++;
+        ++counter;
 
         counter == 10 ? null : startGame.after_render();
 
