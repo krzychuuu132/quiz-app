@@ -33,11 +33,19 @@ const handleIndexChange = () => {
 
     // USER ANSWER
     else {
-      let correct_answer = answers.filter(
-        answer =>
+      let correct_answer = answers.filter(answer => {
+        console.log(
+          answer.firstElementChild.nextElementSibling.innerHTML,
+          correctAnswer
+        );
+        if (
           answer.firstElementChild.nextElementSibling.innerText ===
           correctAnswer
-      );
+        ) {
+          console.log(answer);
+          return answer;
+        }
+      });
 
       if (include_active.length !== 0) {
         let active = include_active[0].innerText;
@@ -57,11 +65,14 @@ const handleIndexChange = () => {
       );
 
       // INCORRECT ANSWERS--STYLE
+      //console.log(correct_answer[0]);
       correct_answer[0].style.backgroundColor = "#2ECC40";
       inCorrect_answer.forEach(
         answer => (answer.style.backgroundColor = "#FF4136")
       );
-
+      // REMOVE LISTENER FROM
+      const btn = document.querySelector(".select");
+      btn.removeEventListener("click", handleIndexChange);
       // CHECKING CORRECT ANSWERS
       setTimeout(() => {
         time = 60;
@@ -86,10 +97,6 @@ const handleIndexChange = () => {
           }
         });
       }, 1000);
-
-      // REMOVE LISTENER FROM
-      const btn = document.querySelector(".select");
-      return btn.removeEventListener("click", handleIndexChange);
     }
   }
 };
