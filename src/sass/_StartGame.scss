@@ -77,8 +77,13 @@
         grid-template-columns: 45px 1fr;
         align-items: center;
         justify-content: start;
+        text-align: center;
+        padding: 0 5px;
 
+        &-text {
 
+            word-wrap: break-word;
+        }
 
 
 
@@ -99,7 +104,7 @@
             line-height: 40px;
             background-color: #e78230;
             border-radius: 85%;
-            margin: 0 10px;
+            margin: 0 2px;
             color: white;
 
 
@@ -119,8 +124,8 @@
 
 
     .answers__answer-number {
-        background-color: #f8f8f8d4;
-        color: black;
+        background-color: transparent;
+        //color: black;
 
         order: 2;
         width: 45px;
@@ -129,11 +134,13 @@
 
     .answers__answer-text {
         order: 1;
+        padding: 0 5px;
 
     }
 
     .answers__answer-icon {
-        color: rgba(0, 0, 0, 0.856)
+        color: rgba(0, 0, 0, 0.856);
+        font-size: 30px;
     }
 
     &::after,

@@ -1,4 +1,3 @@
-//import { index } from "../index";
 let counter = 0;
 let answered = true;
 let correct_user_answer = 0;
@@ -8,25 +7,32 @@ let endGame = false;
 
 const handleIndexChange = () => {
   if (!endGame) {
+    // RESET TIME
+    answered ? (time = 60) : null;
     const { correctAnswer } = localStorage;
 
+    // ELEMENTS
     const answers = [...document.querySelectorAll(".answers__answer")];
     const answers__active = [
       ...document.querySelectorAll(".answers__answer-text")
     ];
 
+    // ACTIVE ELEMENT
     const include_active = answers__active.filter(answer =>
       answer.parentElement.className.includes("answers__answer--active")
     );
 
+    // NO ANSWER FROM USER
     if (include_active.length == 0 && answered === false) {
       answers.forEach(
         answer => (
           (answer.style.backgroundColor = "red"), (answer.style.color = "white")
         )
       );
-    } else {
-      // USER ANSWER
+    }
+
+    // USER ANSWER
+    else {
       let correct_answer = answers.filter(
         answer =>
           answer.firstElementChild.nextElementSibling.innerText ===
@@ -56,19 +62,22 @@ const handleIndexChange = () => {
         answer => (answer.style.backgroundColor = "#FF4136")
       );
 
-      return setTimeout(() => {
+      // CHECKING CORRECT ANSWERS
+      setTimeout(() => {
+        time = 60;
         document.querySelector(".section__info-time").innerText = `01:00 min`;
 
-        time = 60;
         answered = false;
 
         answers.forEach(answer => (answer.style.backgroundColor = ""));
-        ++counter;
+        answers.forEach(answer => (answer.style.color = ""));
+        counter++;
+
         counter == 10 ? null : startGame.after_render();
 
         answers.forEach((answer, index) => {
           answer.classList.remove("answers__answer--active");
-          answer.firstElementChild.innerText = answers_point[index];
+          answer.firstElementChild.innerHTML = answers_point[index];
 
           if (counter === 10) {
             endGame = true;
@@ -76,18 +85,22 @@ const handleIndexChange = () => {
             return setTimeout(() => (window.location = "#/finish"), 1000);
           }
         });
-      }, 2000);
+      }, 1000);
+
+      // REMOVE LISTENER FROM
+      const btn = document.querySelector(".select");
+      return btn.removeEventListener("click", handleIndexChange);
     }
   }
 };
 
-const handleAnswerClick = (index, elements, answers) => {
+const handleAnswerClick = (elements, answers) => {
   const answers_number = document.querySelectorAll(".answers__answer-number");
   answers.forEach(
     answer => ((answer.style.backgroundColor = ""), (answer.style.color = ""))
   );
   elements.firstElementChild.innerHTML =
-    '<span class="fas fa-times answers__answer-icon"></span>';
+    '<span class="fas fa-check-circle answers__answer-icon"></span>';
 
   answers.forEach(answer => answer.classList.remove("answers__answer--active"));
   elements.classList.add("answers__answer--active");
@@ -101,7 +114,6 @@ const handleAnswerClick = (index, elements, answers) => {
 export let startGame = {
   render: async () => {
     localStorage.setItem("userCorrectAnswers", 0);
-
     const { userChoice } = localStorage;
     let userContent = userChoice;
 
@@ -157,14 +169,15 @@ export let startGame = {
       // LISTENERS
       answers_container.forEach((answer, index) =>
         answer.addEventListener("click", () =>
-          handleAnswerClick(index, answer, answers_container)
+          handleAnswerClick(answer, answers_container)
         )
       );
       const btn = document.querySelector(".select");
       btn.addEventListener("click", handleIndexChange);
 
       // API
-      const { userChoice, userLevel, userCategory } = localStorage;
+      const { userLevel, userCategory } = localStorage;
+
       const url = `https://opentdb.com/api.php?amount=10&type=multiple&category=${userCategory}&difficulty=${userLevel.toLowerCase()}`;
 
       const response = await fetch(url, { method: "GET" });
@@ -172,7 +185,7 @@ export let startGame = {
 
       const copyData = data.results.map(result => result);
 
-      // DATA
+      // DATA FROM API
       const {
         category,
         question,
@@ -186,13 +199,14 @@ export let startGame = {
       answers.push(correct_answer);
       answers.sort();
 
-      question_text.innerText = `${counter + 1}. ${question}`;
+      question_text.innerHTML = `${counter + 1}. ${question}`;
 
       answers_elements.forEach(
-        (answer, index) => (answer.innerText = answers[index])
+        (answer, index) => (answer.innerHTML = answers[index])
       );
       const time_counter = document.querySelector(".section__info-time");
 
+      // TIME TO CHOOSE
       const interval = setInterval(setTime, 1000);
       if (!answered) {
         clearInterval(interval);
@@ -211,10 +225,8 @@ export let startGame = {
 
         if (time === 0) {
           answered = true;
-          time = 60;
-          handleIndexChange();
 
-          time_counter.innerText = `01:00 min`;
+          handleIndexChange();
         } else if (counter === 10) {
           clearInterval(interval);
         } else {
@@ -223,16 +235,17 @@ export let startGame = {
         }
       }
 
+      // QUESTION COUNTER
       document.querySelector(".section__info-counter").innerText = `${counter +
         1}/10`;
 
+      // EXIT
       document
         .querySelector(".category__exit")
         .addEventListener(
           "click",
           () => ((window.location = "#"), clearInterval(interval))
         );
-      //  END OF GAME
     }
   }
 };
