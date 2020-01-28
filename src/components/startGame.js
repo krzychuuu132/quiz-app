@@ -5,17 +5,53 @@ const answers_point = ["a", "b", "c", "d"];
 let time = 60;
 let endGame = false;
 
+const GetDataFromApi = async () => {
+  const { userLevel, userCategory } = localStorage;
+
+  const url = `https://opentdb.com/api.php?amount=10&type=multiple&category=${userCategory}&difficulty=${userLevel.toLowerCase()}`;
+
+  const response = await fetch(url, { method: "GET" });
+  const data = await response.json();
+  startGame.render();
+  return data;
+};
+
+// CHECKING CORRECT ANSWERS
+const checkingCorrectAnswer = answers => {
+  time = 60;
+  document.querySelector(".section__info-time").innerText = `01:00 min`;
+
+  answered = false;
+
+  answers.forEach(answer => (answer.style.backgroundColor = ""));
+  answers.forEach(answer => (answer.style.color = ""));
+  counter++;
+
+  counter == 10 ? null : startGame.after_render();
+
+  answers.forEach((answer, index) => {
+    answer.classList.remove("answers__answer--active");
+    answer.firstElementChild.innerHTML = answers_point[index];
+
+    if (counter === 10) {
+      endGame = true;
+
+      return setTimeout(() => (window.location = "#/finish"), 1000);
+    }
+  });
+};
+
 const handleIndexChange = () => {
   if (!endGame) {
-    // RESET TIME
-    answered ? (time = 60) : null;
-    const { correctAnswer } = localStorage;
-
     // ELEMENTS
     const answers = [...document.querySelectorAll(".answers__answer")];
     const answers__active = [
       ...document.querySelectorAll(".answers__answer-text")
     ];
+
+    // RESET TIME
+    answered ? (time = 60) : null;
+    const { correctAnswer } = localStorage;
 
     // ACTIVE ELEMENT
     const include_active = answers__active.filter(answer =>
@@ -33,24 +69,19 @@ const handleIndexChange = () => {
 
     // USER ANSWER
     else {
-      let correct_answer = answers.filter(answer => {
-        console.log(
-          answer.firstElementChild.nextElementSibling.innerHTML,
-          correctAnswer
-        );
-        if (
-          answer.firstElementChild.nextElementSibling.innerText ===
-          correctAnswer
-        ) {
-          console.log(answer);
-          return answer;
-        }
-      });
+      const p = document.createElement("p");
+      p.innerHTML = correctAnswer;
+
+      // CORRECT ANSWERS
+      let correct_answer = answers.filter(
+        answer =>
+          answer.firstElementChild.nextElementSibling.innerText === p.innerHTML
+      );
 
       if (include_active.length !== 0) {
         let active = include_active[0].innerText;
 
-        // USER
+        // USER STATS
         if (correctAnswer === active) {
           correct_user_answer++;
           localStorage.setItem("userCorrectAnswers", correct_user_answer);
@@ -65,37 +96,18 @@ const handleIndexChange = () => {
       );
 
       // INCORRECT ANSWERS--STYLE
-      //console.log(correct_answer[0]);
-      correct_answer[0].style.backgroundColor = "#2ECC40";
       inCorrect_answer.forEach(
         answer => (answer.style.backgroundColor = "#FF4136")
       );
+      correct_answer[0].style.backgroundColor = "#2ECC40";
+
       // REMOVE LISTENER FROM
       const btn = document.querySelector(".select");
       btn.removeEventListener("click", handleIndexChange);
-      // CHECKING CORRECT ANSWERS
+
       setTimeout(() => {
-        time = 60;
-        document.querySelector(".section__info-time").innerText = `01:00 min`;
-
-        answered = false;
-
-        answers.forEach(answer => (answer.style.backgroundColor = ""));
-        answers.forEach(answer => (answer.style.color = ""));
-        counter++;
-
-        counter == 10 ? null : startGame.after_render();
-
-        answers.forEach((answer, index) => {
-          answer.classList.remove("answers__answer--active");
-          answer.firstElementChild.innerHTML = answers_point[index];
-
-          if (counter === 10) {
-            endGame = true;
-
-            return setTimeout(() => (window.location = "#/finish"), 1000);
-          }
-        });
+        // CHECKING CORRECT ANSWERS
+        checkingCorrectAnswer(answers);
       }, 1000);
     }
   }
@@ -120,6 +132,7 @@ const handleAnswerClick = (elements, answers) => {
 };
 export let startGame = {
   render: async () => {
+    console.log("eloo");
     localStorage.setItem("userCorrectAnswers", 0);
     const { userChoice } = localStorage;
     let userContent = userChoice;
@@ -183,13 +196,7 @@ export let startGame = {
       btn.addEventListener("click", handleIndexChange);
 
       // API
-      const { userLevel, userCategory } = localStorage;
-
-      const url = `https://opentdb.com/api.php?amount=10&type=multiple&category=${userCategory}&difficulty=${userLevel.toLowerCase()}`;
-
-      const response = await fetch(url, { method: "GET" });
-      const data = await response.json();
-
+      const data = await GetDataFromApi();
       const copyData = data.results.map(result => result);
 
       // DATA FROM API
