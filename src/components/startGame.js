@@ -1,9 +1,9 @@
 let counter = 0;
+let endGame = false;
 let answered = true;
 let correct_user_answer = 0;
-const answers_point = ["a", "b", "c", "d"];
 let time = 60;
-let endGame = false;
+const answers_point = ["a", "b", "c", "d"];
 
 const GetDataFromApi = async () => {
   const { userLevel, userCategory } = localStorage;
