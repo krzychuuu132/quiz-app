@@ -12,7 +12,7 @@ const GetDataFromApi = async () => {
 
   const response = await fetch(url, { method: "GET" });
   const data = await response.json();
-  startGame.render();
+
   return data;
 };
 
@@ -99,16 +99,17 @@ const handleIndexChange = () => {
       inCorrect_answer.forEach(
         answer => (answer.style.backgroundColor = "#FF4136")
       );
+
       correct_answer[0].style.backgroundColor = "#2ECC40";
+
+      // CHECKING CORRECT ANSWERS
+      setTimeout(() => {
+        checkingCorrectAnswer(answers);
+      }, 1000);
 
       // REMOVE LISTENER FROM
       const btn = document.querySelector(".select");
       btn.removeEventListener("click", handleIndexChange);
-
-      setTimeout(() => {
-        // CHECKING CORRECT ANSWERS
-        checkingCorrectAnswer(answers);
-      }, 1000);
     }
   }
 };
@@ -132,7 +133,6 @@ const handleAnswerClick = (elements, answers) => {
 };
 export let startGame = {
   render: async () => {
-    console.log("eloo");
     localStorage.setItem("userCorrectAnswers", 0);
     const { userChoice } = localStorage;
     let userContent = userChoice;
