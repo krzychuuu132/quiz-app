@@ -4,8 +4,8 @@ import { Error404 } from "./components/Error404";
 import { Utils } from "./components/pathSettings";
 import { Level } from "./components/Level";
 import { Home } from "./components/Home";
-import { startGame } from "./components/startGame";
-import { Finish } from "./components/finishGame";
+import { startGame } from "./components/game/startGame";
+import { Finish } from "./components/game/finishGame";
 
 const routes = {
   "/": Home,

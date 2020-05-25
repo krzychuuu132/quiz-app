@@ -1,4 +1,7 @@
+
+
 export const handleCategoryClick = (divs, btn_category, index) => {
+
   // VALIDATION
   divs.forEach(div => (div.style.backgroundColor = ""));
 
@@ -10,16 +13,24 @@ export const handleCategoryClick = (divs, btn_category, index) => {
   btn_category.classList.add("select--active");
 };
 
+
+
 export const handleSubmitCategory = divs => {
+
   const checking = divs.filter(div =>
     div.className.includes("categories__option--active")
   );
 
   if (checking.length === 0) {
+
     divs.forEach(div => (div.style.backgroundColor = "red"));
+
   } else {
+    
     localStorage.setItem("userChoice", checking[0].dataset.name);
     localStorage.setItem("userCategory", checking[0].dataset.category);
     window.location = "#/level";
+
   }
+
 };

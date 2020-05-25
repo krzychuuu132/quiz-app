@@ -20,6 +20,7 @@ export let Finish = {
     return view;
   },
   after_render: async () => {
+
     const { userCorrectAnswers } = localStorage;
     const btn_exit = document.querySelector(".header-end__exit");
     btn_exit.classList.add("category__exit");
@@ -35,5 +36,6 @@ export let Finish = {
     else result.style.color = "#2ABC64";
 
     result.innerText = `${result_points}% Score`;
+    
   }
 };

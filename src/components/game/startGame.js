@@ -3,9 +3,11 @@ let endGame = false;
 let answered = true;
 let correct_user_answer = 0;
 let time = 60;
+let loading = true;
 const answers_point = ["a", "b", "c", "d"];
 
 const GetDataFromApi = async () => {
+
   const { userLevel, userCategory } = localStorage;
 
   const url = `https://opentdb.com/api.php?amount=10&type=multiple&category=${userCategory}&difficulty=${userLevel.toLowerCase()}`;
@@ -13,8 +15,11 @@ const GetDataFromApi = async () => {
   const response = await fetch(url, { method: "GET" });
   const data = await response.json();
 
-  return data;
+  localStorage.setItem("data",JSON.stringify(data.results))
+  return data
 };
+
+
 
 // CHECKING CORRECT ANSWERS
 const checkingCorrectAnswer = answers => {
@@ -30,6 +35,7 @@ const checkingCorrectAnswer = answers => {
   counter == 10 ? null : startGame.after_render();
 
   answers.forEach((answer, index) => {
+
     answer.classList.remove("answers__answer--active");
     answer.firstElementChild.innerHTML = answers_point[index];
 
@@ -38,7 +44,9 @@ const checkingCorrectAnswer = answers => {
 
       return setTimeout(() => (window.location = "#/finish"), 1000);
     }
+
   });
+
 };
 
 const handleIndexChange = () => {
@@ -91,8 +99,7 @@ const handleIndexChange = () => {
       // INCORRECT ANSWERS
       const inCorrect_answer = answers.filter(
         answer =>
-          answer.firstElementChild.nextElementSibling.innerText !==
-          correctAnswer
+          answer.firstElementChild.nextElementSibling.innerText !== p.innerHTML
       );
 
       // INCORRECT ANSWERS--STYLE
@@ -114,6 +121,7 @@ const handleIndexChange = () => {
   }
 };
 
+
 const handleAnswerClick = (elements, answers) => {
   const answers_number = document.querySelectorAll(".answers__answer-number");
   answers.forEach(
@@ -131,9 +139,15 @@ const handleAnswerClick = (elements, answers) => {
     }
   });
 };
+
+
+
 export let startGame = {
   render: async () => {
     localStorage.setItem("userCorrectAnswers", 0);
+    localStorage.removeItem('data');
+    loading = true;
+
     const { userChoice } = localStorage;
     let userContent = userChoice;
 
@@ -187,7 +201,7 @@ export let startGame = {
       ];
 
       // LISTENERS
-      answers_container.forEach((answer, index) =>
+      answers_container.forEach((answer) =>
         answer.addEventListener("click", () =>
           handleAnswerClick(answer, answers_container)
         )
@@ -196,70 +210,89 @@ export let startGame = {
       btn.addEventListener("click", handleIndexChange);
 
       // API
-      const data = await GetDataFromApi();
-      const copyData = data.results.map(result => result);
+       let data = localStorage.getItem('data')
 
-      // DATA FROM API
-      const {
-        category,
-        question,
-        type,
-        correct_answer,
-        incorrect_answers: answers,
-        difficulty
-      } = copyData[counter];
-      localStorage.setItem("correctAnswer", correct_answer);
+       if(data===null){
+         loading = true;
+         await GetDataFromApi();
+        startGame.after_render();
+       }
 
-      answers.push(correct_answer);
-      answers.sort();
+       else{
+      
+        data = JSON.parse(data)
+        loading = false;
+       }
+      
 
-      question_text.innerHTML = `${counter + 1}. ${question}`;
-
-      answers_elements.forEach(
-        (answer, index) => (answer.innerHTML = answers[index])
-      );
-      const time_counter = document.querySelector(".section__info-time");
-
-      // TIME TO CHOOSE
-      const interval = setInterval(setTime, 1000);
-      if (!answered) {
-        clearInterval(interval);
-      }
-      function setTime() {
-        time < 10
-          ? (time_counter.innerText = `00:0${time} min`)
-          : (time_counter.innerText = `00:${time} min`);
-        if (time <= 10) {
-          time_counter.style.color = "red";
-          time_counter.style.fontSize = "18px";
-        } else {
-          time_counter.style.color = "white";
-          time_counter.style.fontSize = "16px";
-        }
-
-        if (time === 0) {
-          answered = true;
-
-          handleIndexChange();
-        } else if (counter === 10) {
-          clearInterval(interval);
-        } else {
-          time--;
-          answered = false;
-        }
-      }
-
-      // QUESTION COUNTER
-      document.querySelector(".section__info-counter").innerText = `${counter +
-        1}/10`;
-
-      // EXIT
-      document
-        .querySelector(".category__exit")
-        .addEventListener(
-          "click",
-          () => ((window.location = "#"), clearInterval(interval))
+       if(!loading){
+       
+        const copyData = [...data];
+      
+        // DATA FROM API
+        const {
+          category,
+          question,
+          type,
+          correct_answer,
+          incorrect_answers: answers,
+          difficulty
+        } = copyData[counter];
+        localStorage.setItem("correctAnswer", correct_answer);
+  
+        answers.push(correct_answer);
+        answers.sort();
+  
+        question_text.innerHTML = `${counter + 1}. ${question}`;
+  
+        answers_elements.forEach(
+          (answer, index) => (answer.innerHTML = answers[index])
         );
+        const time_counter = document.querySelector(".section__info-time");
+  
+        // TIME TO CHOOSE
+        const interval = setInterval(setTime, 1000);
+        if (!answered) {
+          clearInterval(interval);
+        }
+        function setTime() {
+          time < 10
+            ? (time_counter.innerText = `00:0${time} min`)
+            : (time_counter.innerText = `00:${time} min`);
+          if (time <= 10) {
+            time_counter.style.color = "red";
+            time_counter.style.fontSize = "18px";
+          } else {
+            time_counter.style.color = "white";
+            time_counter.style.fontSize = "16px";
+          }
+  
+          if (time === 0) {
+            answered = true;
+  
+            handleIndexChange();
+          } else if (counter === 10) {
+            clearInterval(interval);
+          } else {
+            time--;
+            answered = false;
+          }
+        }
+  
+        // QUESTION COUNTER
+        document.querySelector(".section__info-counter").innerText = `${counter +
+          1}/10`;
+  
+        // EXIT
+        document
+          .querySelector(".category__exit")
+          .addEventListener(
+            "click",
+            () => ((window.location = "#"), clearInterval(interval))
+          );
+       }
+      
+     
     }
   }
 };
