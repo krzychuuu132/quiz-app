@@ -2,6 +2,7 @@ import {
   handleSubmitCategory,
   handleCategoryClick
 } from "./CategoriesValidation";
+
 import { handleBtnClick } from "./navigation";
 
 export let Home = {
@@ -19,13 +20,18 @@ export let Home = {
           <div class="nav__user"><img src="img/user.png" class="nav__user-img" alt="user"></div>
       </nav>
       
-  </header>
+      </header>
+
   <div class="menu">
-  <ul class="menu__list">
-  <li class="menu__item"><a class="menu__link href="#">Home</a></li>
-  <li class="menu__item"><a class="menu__link href="#">Ranking</a></li>
-  <li class="menu__item"><a class="menu__link href="#">About</a></li>
-  </ul>
+
+            <ul class="menu__list">
+
+                            <li class="menu__item"><a class="menu__link href="#">Home</a></li>
+                            <li class="menu__item"><a class="menu__link href="#">Ranking</a></li>
+                            <li class="menu__item"><a class="menu__link href="#">About</a></li>
+                            
+            </ul>
+
   </div>
   
   <main class="main">

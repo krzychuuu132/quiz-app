@@ -16,9 +16,9 @@ const GetDataFromApi = async () => {
   const data = await response.json();
 
   localStorage.setItem("data",JSON.stringify(data.results))
+
   return data
 };
-
 
 
 // CHECKING CORRECT ANSWERS
@@ -163,27 +163,43 @@ export let startGame = {
 
     let view = /*html*/ `
     <header class="category">
-    <img src='img/${userChoice}.png' class="category__picture" alt=${userChoice}>
-    <span class="category__content">${userContent}</span>
-    <button class="category__exit"></button>
+
+                <div class="category__title">
+
+                                  <img src='img/${userChoice}.png' class="category__picture" alt=${userChoice}>
+                                  <span class="category__content">${userContent}</span>
+
+                </div>
+
+                <button class="category__exit"></button>
 
 </header>
-<section class="section">
-  <div class="section__info">
-      <span class="section__info-length">Quiz:<span class="section__info-counter">10</span></span>
-      <span class="section__info-time">01:00 min</span>
-  </div>
-  <div class="section__question">
-  <p class="section__question-text"></p>
 
-    <div class="answers">
-        <div class="answers__answer"><span class="answers__answer-number">a</span><span class="answers__answer-text"></span></div>
-        <div class="answers__answer"><span class="answers__answer-number">b</span><span class="answers__answer-text"></span></div>
-        <div class="answers__answer"><span class="answers__answer-number">c</span><span class="answers__answer-text"></span></div>
-        <div class="answers__answer"><span class="answers__answer-number">d</span><span class="answers__answer-text"></span></div>
+<section class="section">
+
+        <div class="section__info">
+                        <span class="section__info-length">Quiz:<span class="section__info-counter">10</span></span>
+                        <span class="section__info-time">01:00 min</span>
+        </div>
+
+        <div class="section__question">
+
+                        <p class="section__question-text"></p>
+
+                        <div class="answers">
+
+                                        <div class="answers__answer"><span class="answers__answer-number">a</span><span class="answers__answer-text"></span></div>
+                                        <div class="answers__answer"><span class="answers__answer-number">b</span><span class="answers__answer-text"></span></div>
+                                        <div class="answers__answer"><span class="answers__answer-number">c</span><span class="answers__answer-text"></span></div>
+                                        <div class="answers__answer"><span class="answers__answer-number">d</span><span class="answers__answer-text"></span></div>
+                        
+                        </div>
+
+
     </div>
-  </div>
+    
 </section>
+
 <button class="select">submit</button>
       `;
 

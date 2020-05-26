@@ -13,8 +13,14 @@ export let Level = {
 
     let view = /*html*/ `
         <header class="category">
-        <img src='img/${userChoice}.png' class="category__picture" alt=${userChoice}>
-        <span class="category__content">${userContent}</span>
+
+        <div class="category__title">
+
+                                    <img src='img/${userChoice}.png' class="category__picture" alt=${userChoice}>
+                                    <span class="category__content">${userContent}</span>
+                                    
+        </div>
+
         <button class="category__exit"></button>
 
     </header>

@@ -1,26 +1,34 @@
 @mixin button-exit_line {
     content: "";
     position: absolute;
-    left: 0;
+    left: 50%;
     top: 0;
     width: 2px;
     height: 100%;
     background-color: white;
     border-radius: 15px;
+    transform: translateX(-50%);
 }
 
 .category {
     height: 60px;
     background-color: #2e425a;
-    display: grid;
-    grid-template-columns: 90px auto 1fr;
-    justify-content: start;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    padding: 0 20px;
+
+    &__title{
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+    }
 
     &__picture {
         display: block;
         height: 45px;
-        padding-left: 20px;
+        margin-right: 10px;
     }
 
 
@@ -41,13 +49,15 @@
         background-color: transparent;
         position: relative;
         border: none;
-        outline: none;
-        grid-column: 5;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+        
+     
+      
 
         @media(min-width:1024px) {
             cursor: pointer;
-
-
 
             &:hover::after,
             &:hover::before {
@@ -91,6 +101,7 @@
     &__level {
         width: 70%;
         max-width: 700px;
+        min-width: 270px;
         height: 50px;
         background-color: #2e425a;
         margin: 50px auto;
